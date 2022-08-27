@@ -1,0 +1,55 @@
+  ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        
+        
+        // // BRUTE FORCE  TC:O(2*N) SC:O(1)
+        // int c=0;
+        // ListNode * dum=head;
+        // while(dum!=NULL)
+        // {
+        //     dum=dum->next;
+        //     c++;
+        // }
+        // if(c==n)
+        // {
+        //     ListNode * temp=head;
+        //     head=head->next;
+        //     delete(temp);                //If first node is to be deleted
+        // }
+        // else {
+        //     ListNode * temp=head;
+        //     int c1=1;
+        //     while(c1<c-n)   
+        //     {
+        //         temp=temp->next;
+        //         c1++;
+        //     }
+        //     ListNode * pum=temp->next;
+        //     temp->next=temp->next->next;
+        //     delete(pum);
+        // }
+        // return head;
+        ListNode * st=new ListNode();
+        st->next=head;
+        ListNode * fast=st;
+        ListNode * slow=st;
+        for(int i=1;i<=n;i++)
+        {
+            fast=fast->next;
+        }
+        while(fast->next!=NULL)
+        {
+            fast=fast->next;
+            slow=slow->next;
+        }
+        slow->next=slow->next->next;
+        return st->next;
+    }
+};
